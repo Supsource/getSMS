@@ -3,12 +3,19 @@ from flask_cors import CORS
 from scripts.filter_users import filter_due_users
 from scripts.send_sms import send_bulk_sms
 import os
+import logging
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app, resources={r"/*": {"origins": "https://your-vercel-app.vercel.app"}})  # Set your Vercel URL
+logging.basicConfig(level=logging.INFO)
 
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1UwJs99EHSAZl9d1YSmlWPABKrT6nzVU3QzJeirtkJwo/edit?gid=0#gid=0'
 CREDENTIALS_FILE = 'config/credentials.json'
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    logging.error(f"Error occurred: {str(e)}")
+    return jsonify({"error": str(e)}), 500
 
 @app.route('/api/due-users', methods=['GET'])
 def get_due_users():
