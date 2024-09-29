@@ -75,20 +75,21 @@ const DueUsers = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Users with Upcoming Due Dates</h1>
-      {error && <div className="text-red-600 mb-4">{error}</div>}
+    <div className="p-6 bg-white min-h-screen font-sans">
+      <h1 className="text-5xl font-semibold text-center mb-8 text-gray-900">Users with Upcoming Due Dates</h1>
 
-      <div className="text-center mb-6">
+      {error && <div className="text-red-600 mb-4 text-center">{error}</div>}
+
+      <div className="text-center mb-12">
         <button 
-          className={`bg-blue-600 text-white px-5 py-3 rounded-lg mr-3 transition duration-300 hover:bg-blue-500 ${loadingFetch ? 'opacity-50 cursor-not-allowed' : ''}`} 
+          className={`bg-gray-900 text-white text-lg px-6 py-3 rounded-lg shadow-md mr-4 transition-transform duration-300 transform hover:scale-105 ${loadingFetch ? 'opacity-50 cursor-not-allowed' : ''}`} 
           onClick={fetchUsers}
           disabled={loadingFetch}
         >
           {loadingFetch ? 'Loading...' : 'Refresh'}
         </button>
         <button 
-          className={`bg-green-600 text-white px-5 py-3 rounded-lg transition duration-300 hover:bg-green-500 ${loadingFetch ? 'opacity-50 cursor-not-allowed' : ''}`} 
+          className={`bg-gray-700 text-white text-lg px-6 py-3 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 ${loadingFetch ? 'opacity-50 cursor-not-allowed' : ''}`} 
           onClick={exportCsv}
           disabled={loadingFetch} 
         >
@@ -96,18 +97,18 @@ const DueUsers = () => {
         </button>
       </div>
 
-      {loadingFetch && <div className="text-center text-blue-600 text-lg">Loading...</div>} {/* Loading Indicator */}
+      {loadingFetch && <div className="text-center text-gray-900 text-lg">Loading...</div>} {/* Loading Indicator */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {users.map(user => (
-          <div key={user['Contact Number']} className="border rounded-lg p-5 shadow-md bg-white transition duration-200 hover:shadow-lg">
-            <h2 className="text-xl font-semibold text-gray-800">{user.ownerName}</h2>
-            <p><strong className="text-gray-600">Vehicle No:</strong> {user.vehicleNo}</p>
-            <p><strong className="text-gray-600">Contact Number:</strong> {user['Contact Number']}</p>
-            <p><strong className="text-gray-600">Pollution Due Date:</strong> {formatDate(user.pollutionDueDate)}</p>
-            <p><strong className="text-gray-600">Insurance Due Date:</strong> {formatDate(user.insuranceDueDate)}</p>
+          <div key={user['Contact Number']} className="border border-gray-200 rounded-lg p-6 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-300">
+            <h2 className="text-2xl font-semibold text-gray-900">{user.ownerName}</h2>
+            <p className="text-lg text-gray-600 mt-3"><strong>Vehicle No:</strong> {user.vehicleNo}</p>
+            <p className="text-lg text-gray-600 mt-2"><strong>Contact Number:</strong> {user['Contact Number']}</p>
+            <p className="text-lg text-gray-600 mt-2"><strong>Pollution Due Date:</strong> {formatDate(user.pollutionDueDate)}</p>
+            <p className="text-lg text-gray-600 mt-2"><strong>Insurance Due Date:</strong> {formatDate(user.insuranceDueDate)}</p>
             <button 
-              className={`mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 hover:bg-blue-500 ${loadingSms[user['Contact Number']] ? 'opacity-50 cursor-not-allowed' : ''}`} 
+              className={`mt-6 w-full bg-gray-900 text-white text-lg px-5 py-3 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 ${loadingSms[user['Contact Number']] ? 'opacity-50 cursor-not-allowed' : ''}`} 
               onClick={() => sendSms(user)}
               disabled={loadingSms[user['Contact Number']]} 
             >
@@ -118,16 +119,16 @@ const DueUsers = () => {
       </div>
 
       {smsSentUsers.length > 0 && (
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">SMS Already Sent</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-16">
+          <h2 className="text-4xl font-semibold text-center mb-8 text-gray-900">SMS Already Sent</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {smsSentUsers.map(user => (
-              <div key={user['Contact Number']} className="border rounded-lg p-5 shadow-md bg-white transition duration-200 hover:shadow-lg">
-                <h2 className="text-xl font-semibold text-gray-800">{user.ownerName}</h2>
-                <p><strong className="text-gray-600">Vehicle No:</strong> {user.vehicleNo}</p>
-                <p><strong className="text-gray-600">Contact Number:</strong> {user['Contact Number']}</p>
-                <p><strong className="text-gray-600">Pollution Due Date:</strong> {formatDate(user.pollutionDueDate)}</p>
-                <p><strong className="text-gray-600">Insurance Due Date:</strong> {formatDate(user.insuranceDueDate)}</p>
+              <div key={user['Contact Number']} className="border border-gray-200 rounded-lg p-6 shadow-md bg-gray-50 hover:shadow-lg transition-shadow duration-300">
+                <h2 className="text-2xl font-semibold text-gray-900">{user.ownerName}</h2>
+                <p className="text-lg text-gray-600 mt-3"><strong>Vehicle No:</strong> {user.vehicleNo}</p>
+                <p className="text-lg text-gray-600 mt-2"><strong>Contact Number:</strong> {user['Contact Number']}</p>
+                <p className="text-lg text-gray-600 mt-2"><strong>Pollution Due Date:</strong> {formatDate(user.pollutionDueDate)}</p>
+                <p className="text-lg text-gray-600 mt-2"><strong>Insurance Due Date:</strong> {formatDate(user.insuranceDueDate)}</p>
               </div>
             ))}
           </div>
