@@ -6,7 +6,7 @@ import os
 import logging
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://your-vercel-app.vercel.app"}})  # Set your Vercel URL
+CORS(app, resources={r"/*": {"origins": "https://get-sms.vercel.app/"}}) 
 logging.basicConfig(level=logging.INFO)
 
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1UwJs99EHSAZl9d1YSmlWPABKrT6nzVU3QzJeirtkJwo/edit?gid=0#gid=0'
