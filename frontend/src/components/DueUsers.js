@@ -18,7 +18,7 @@ const DueUsers = () => {
       })
       .catch(err => {
         console.error(err);
-        setError('An error occurred while fetching users. Try Reloading');
+        setError('An error occurred while fetching users. Try Reloading!');
         setLoadingFetch(false);
       });
   }, [smsSentUsers]);
